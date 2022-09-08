@@ -36,7 +36,7 @@ with DAG(
         task_id='spark_transform_frete_new',
         namespace='spark',
         application_file='spark.yml',
-        kubernetes_conn_id='kube-local',
+        kubernetes_conn_id='kube-remote-dev',
         do_xcom_push=True,
     )
     
@@ -44,7 +44,7 @@ with DAG(
         task_id='monitor_spark_app_status',
         namespace="spark",
         application_name="{{ task_instance.xcom_pull(task_ids='spark_transform_frete_new')['metadata']['name'] }}",
-        kubernetes_conn_id="kube-local",
+        kubernetes_conn_id="kube-remote-dev",
         attach_log=True
     )
 

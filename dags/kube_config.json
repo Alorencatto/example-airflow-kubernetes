@@ -1,0 +1,88 @@
+{
+    "kind": "Config",
+    "apiVersion": "v1",
+    "preferences": {},
+    "clusters": [
+        {
+            "name": "curso",
+            "cluster": {
+                "server": "https://postgresql-dev.intradesk/k8s/clusters/c-xgvhb",
+                "certificate-authority-data": "DATA+OMITTED"
+            }
+        },
+        {
+            "name": "curso-k8s-1",
+            "cluster": {
+                "server": "https://172.26.14.7:6443",
+                "certificate-authority-data": "DATA+OMITTED"
+            }
+        },
+        {
+            "name": "minikube",
+            "cluster": {
+                "server": "https://172.26.14.7:8443",
+                "certificate-authority": "/opt/airflow/dags/kube.crt",
+                "extensions": [
+                    {
+                        "name": "cluster_info",
+                        "extension": {
+                            "last-update": "Wed, 31 Aug 2022 14:13:41 -03",
+                            "provider": "minikube.sigs.k8s.io",
+                            "version": "v1.25.2"
+                        }
+                    }
+                ]
+            }
+        }
+    ],
+    "users": [
+        {
+            "name": "curso",
+            "user": {
+                "token": "REDACTED"
+            }
+        },
+        {
+            "name": "minikube",
+            "user": {
+                "client-certificate": "/opt/airflow/dags/client.crt",
+                "client-key": "/opt/airflow/dags/client.key"
+            }
+        }
+    ],
+    "contexts": [
+        {
+            "name": "curso",
+            "context": {
+                "cluster": "curso",
+                "user": "curso"
+            }
+        },
+        {
+            "name": "curso-k8s-1",
+            "context": {
+                "cluster": "curso-k8s-1",
+                "user": "curso"
+            }
+        },
+        {
+            "name": "minikube",
+            "context": {
+                "cluster": "minikube",
+                "user": "minikube",
+                "namespace": "default",
+                "extensions": [
+                    {
+                        "name": "context_info",
+                        "extension": {
+                            "last-update": "Wed, 31 Aug 2022 14:13:41 -03",
+                            "provider": "minikube.sigs.k8s.io",
+                            "version": "v1.25.2"
+                        }
+                    }
+                ]
+            }
+        }
+    ],
+    "current-context": "minikube"
+}

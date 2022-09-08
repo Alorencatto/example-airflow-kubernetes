@@ -1,0 +1,18 @@
+
+version: '3.0'
+
+services:
+
+  airflow:
+    image: alorencatto/owshq-apache-airflow:2.2.2
+    container_name: dev-airflow
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./plugins:/opt/airflow/plugins #Operators e hooks
+    environment:
+      - AIRFLOW_HOME=/opt/airflow
+    ports:
+      - 9000:8080
+    command: 'bash -c "airflow db init && airflow webserver -D && airflow scheduler -D"'
+
+
